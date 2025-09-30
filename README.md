@@ -19,8 +19,8 @@ A Laravel 11 RESTful API for user authentication, role-based access control, and
 ### 1. Clone & Install
 
 ```bash
-git clone https://github.com/your-repo/role-based-auth.git
-cd role-based-auth
+git clone https://github.com/Shovickbarua/role-based.git
+cd role-based
 composer install
 ```
 
@@ -91,7 +91,6 @@ Permissions:
 - `create products`
 - `edit products`
 - `delete products`
-- `manage users` (admin only)
 
 ---
 
