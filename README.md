@@ -1,6 +1,6 @@
 # Role-Based Auth & Product Management API
 
-A Laravel 11 RESTful API for user authentication, role-based access control, and product management using Sanctum and Spatie Permission.
+A Laravel 12 RESTful API for user authentication, role-based access control, and product management using Sanctum and Spatie Permission.
 
 ---
 
