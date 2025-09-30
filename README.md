@@ -1,61 +1,137 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Role-Based Auth & Product Management API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel 11 RESTful API for user authentication, role-based access control, and product management using Sanctum and Spatie Permission.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **User Authentication** (login/logout) via Laravel Sanctum
+- **Role-Based Access Control** (Admin, Manager, User) via Spatie Permission
+- **Product CRUD** with permission checks
+- **Consistent JSON responses**
+- **Comprehensive API documentation** (`API_DOCUMENTATION.md`)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Quick Start
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 1. Clone & Install
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+git clone https://github.com/your-repo/role-based-auth.git
+cd role-based-auth
+composer install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Environment Setup
 
-## Laravel Sponsors
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+Edit `.env` and set your database credentials.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 3. Migrate & Seed
 
-### Premium Partners
+```bash
+php artisan migrate
+php artisan db:seed
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 4. Serve
 
-## Contributing
+```bash
+php artisan serve
+```
+API will be available at:  
+`http://localhost:8000/api`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## Default Users
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| Email               | Password | Role   |
+|---------------------|----------|--------|
+| admin@example.com   | password | Admin  |
+| manager@example.com | password | Manager|
+| user@example.com    | password | User   |
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## API Usage
+
+### Authentication
+
+- **Login:** `POST /api/login`
+- **Logout:** `POST /api/logout`
+
+### Products
+
+- **List:** `GET /api/products`
+- **Create:** `POST /api/products`
+- **Show:** `GET /api/products/{id}`
+- **Update:** `PUT/PATCH /api/products/{id}`
+- **Delete:** `DELETE /api/products/{id}`
+
+All protected endpoints require:
+
+- `Authorization: Bearer {token}`
+
+---
+
+## Permissions & Roles
+
+- **Admin:** Full access
+- **Manager:** Manage products
+- **User:** View products
+
+Permissions:
+- `view products`
+- `create products`
+- `edit products`
+- `delete products`
+- `manage users` (admin only)
+
+---
+
+## Error Handling
+
+- `401 Unauthorized`: Invalid/missing token
+- `403 Forbidden`: Insufficient permissions
+- `422 Validation Error`: Invalid input
+- `404 Not Found`: Resource missing
+
+---
+
+## Documentation
+
+See [`API_DOCUMENTATION.md`](./API_DOCUMENTATION.md) for:
+- Full endpoint details
+- Request/response examples
+- Setup instructions
+- Usage scenarios
+- Troubleshooting
+
+---
+
+## Testing
+
+Use Postman, Insomnia, or cURL for API testing.  
+Example login request:
+
+```bash
+curl -X POST http://localhost:8000/api/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "admin@example.com", "password": "password"}'
+```
+
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT
+
+---
+
+*For questions or support, open an issue or contact the maintainer.*
