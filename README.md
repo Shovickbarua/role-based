@@ -10,7 +10,6 @@ A Laravel 12 RESTful API for user authentication, role-based access control, and
 - **Role-Based Access Control** (Admin, Manager, User) via Spatie Permission
 - **Product CRUD** with permission checks
 - **Consistent JSON responses**
-- **Comprehensive API documentation** (`API_DOCUMENTATION.md`)
 
 ---
 
